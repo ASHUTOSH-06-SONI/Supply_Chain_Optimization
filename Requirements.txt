@@ -1,0 +1,7 @@
+List of python packages used
+streamlit
+pandas
+matplotlib
+scikit-learn
+prophet
+numpy
