@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/25ef0380-144d-491e-8472-6bfe3f9a7695)# 📦 Supply Chain Demand Forecasting & Inventory Optimization
+📦 Supply Chain Demand Forecasting & Inventory Optimization
 
 An AI-powered application to forecast product demand and generate intelligent inventory restocking recommendations. Built with **Prophet**, **custom clustering algorithms**, and deployed on **AWS EC2** via **Streamlit**.
 
