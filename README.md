@@ -1,8 +1,24 @@
 📦 Supply Chain Demand Forecasting & Inventory Optimization
 
+⚠️ Live Demo
+Due to AWS free tier limits, the live app is not hosted 24/7.
+📩 If you'd like to try it out, feel free to contact me, and I’ll spin it up instantly.
+
 An AI-powered application to forecast product demand and generate intelligent inventory restocking recommendations. Built with **Prophet**, **custom clustering algorithms**, and deployed on **AWS EC2** via **Streamlit**.
 
----
+---Yes, absolutely — you should add the GitHub repo link.
+
+Even if it just contains the code (and not a live deployment), it:
+
+✅ Shows your implementation
+
+✅ Lets judges/devs review your work
+
+✅ Acts as proof of originality
+
+✅ Helps if they want to run it locally or understand your logic
+
+
 
 ---
 
