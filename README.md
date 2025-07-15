@@ -5,17 +5,7 @@ http://13.61.12.12:8501
 since I hosted this on AWS EC2 Free tier instance, I haven't given any domain name to my website 
 An AI-powered application to forecast product demand and generate intelligent inventory restocking recommendations. Built with **Prophet**, **custom clustering algorithms**, and deployed on **AWS EC2** via **Streamlit**.
 
----Yes, absolutely — you should add the GitHub repo link.
 
-Even if it just contains the code (and not a live deployment), it:
-
-✅ Shows your implementation
-
-✅ Lets judges/devs review your work
-
-✅ Acts as proof of originality
-
-✅ Helps if they want to run it locally or understand your logic
 
 
 
