@@ -1,11 +1,10 @@
 📦 Supply Chain Demand Forecasting & Inventory Optimization
 
+Note:
+The application is currently not hosted on AWS Free Tier to avoid unnecessary charges.
+It will be redeployed later and extended to support forecasting on any user-uploaded dataset.
 
-
-(Currently I've stopped hosting this on AWS Free tier, I will eventually shift this to netlify and update this predict for any dataset that's imputed)
-An AI-powered application to forecast product demand and generate intelligent inventory restocking recommendations. Built with **Prophet**, **custom clustering algorithms**, and deployed on **AWS EC2** via **Streamlit**.
----
-
+An AI-powered application that forecasts product demand and generates intelligent inventory restocking recommendations. Built using Facebook Prophet, custom hybrid clustering algorithms, and deployed on AWS EC2 using Streamlit.
 ## 📊 Features
 
 - 📈 **Time Series Forecasting** (30-day horizon) using Facebook Prophet Library
