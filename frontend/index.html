@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Intelligence System</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Inventory Intelligence System v2</p>
+          <h1>Live inventory decisions</h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to black mode" data-testid="theme-toggle">
+            <span class="theme-icon" aria-hidden="true"></span>
+          </button>
+          <div class="system-status" aria-label="System status">
+            <span class="pulse"></span>
+            <span id="stream-status">Stream idle</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="control-band" aria-label="Event controls">
+        <div class="control-group">
+          <label for="product-select">Product</label>
+          <select id="product-select" data-testid="product-select">
+            <option value="milk">Milk</option>
+            <option value="rice">Rice</option>
+            <option value="bread">Bread</option>
+            <option value="detergent">Detergent</option>
+          </select>
+        </div>
+
+        <div class="segmented" role="group" aria-label="Event type">
+          <button class="segment active" type="button" data-event-type="sale" aria-pressed="true">Sale</button>
+          <button class="segment" type="button" data-event-type="stock" aria-pressed="false">Stock</button>
+        </div>
+
+        <div class="control-group quantity-control">
+          <label for="quantity-input">Quantity</label>
+          <input id="quantity-input" type="number" min="0" max="250" value="14" data-testid="quantity-input">
+        </div>
+
+        <button class="primary-action" id="inject-event" type="button" data-testid="inject-event">
+          Inject Event
+        </button>
+
+        <label class="switch-control">
+          <span>Auto stream</span>
+          <input id="auto-stream" type="checkbox" data-testid="auto-stream">
+        </label>
+
+        <div class="control-group speed-control">
+          <label for="speed-range">Speed</label>
+          <input id="speed-range" type="range" min="700" max="2600" step="100" value="1400">
+        </div>
+
+        <button class="ghost-action" id="reset-state" type="button">Reset</button>
+      </section>
+
+      <section class="metrics-grid" aria-label="System metrics">
+        <article class="metric-tile">
+          <span>Products</span>
+          <strong id="metric-products">4</strong>
+        </article>
+        <article class="metric-tile">
+          <span>Total stock</span>
+          <strong id="metric-stock">0</strong>
+        </article>
+        <article class="metric-tile">
+          <span>Predicted demand</span>
+          <strong id="metric-demand">0</strong>
+        </article>
+        <article class="metric-tile urgent">
+          <span>Open restocks</span>
+          <strong id="metric-restocks">0</strong>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <div class="panel inventory-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">State</p>
+              <h2>Inventory</h2>
+            </div>
+            <span id="last-event-time">No events</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Type</th>
+                  <th>Stock</th>
+                  <th>Demand</th>
+                  <th>Decision</th>
+                  <th>Qty</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel chart-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Forecast</p>
+              <h2>Demand window</h2>
+            </div>
+            <span id="chart-product-label">Milk</span>
+          </div>
+          <canvas id="demand-chart" width="720" height="300" aria-label="Demand chart"></canvas>
+        </div>
+
+        <div class="panel feed-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Output</p>
+              <h2>Decision feed</h2>
+            </div>
+            <span id="event-count">0 events</span>
+          </div>
+          <ol id="decision-feed" class="decision-feed"></ol>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
