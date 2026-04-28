@@ -251,6 +251,8 @@ label,
 }
 
 select,
+input[type="text"],
+input[list],
 input[type="number"] {
   width: 100%;
   min-height: 42px;
@@ -398,6 +400,7 @@ input:focus {
 }
 
 .chart-panel,
+.intelligence-panel,
 .feed-panel {
   grid-column: 2 / 3;
 }
@@ -425,7 +428,7 @@ input:focus {
 
 table {
   width: 100%;
-  min-width: 760px;
+  min-width: 960px;
   border-collapse: collapse;
 }
 
@@ -475,6 +478,97 @@ tbody tr:hover {
   font-weight: 300;
 }
 
+.mini-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  margin: 0 5px 5px 0;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0 7px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 300;
+}
+
+.metadata-card {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+}
+
+.metadata-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.metadata-title span {
+  font-size: 1.35rem;
+  font-weight: 300;
+}
+
+.metadata-title strong {
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  padding: 6px 9px;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.metadata-grid div {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 9px;
+  background: var(--surface-3);
+}
+
+.metadata-grid dt {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.metadata-grid dd {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+  font-weight: 300;
+  overflow-wrap: anywhere;
+}
+
+.reasoning-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.reasoning-strip span {
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  padding: 6px 8px;
+  font-size: 0.76rem;
+  font-weight: 300;
+}
+
+.decision-rationale {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
 .stock-bar {
   width: 100%;
   max-width: 160px;
@@ -519,6 +613,12 @@ tbody tr:hover {
   color: var(--inverse);
 }
 
+.badge.alert {
+  background: var(--surface-2);
+  color: var(--ink);
+  border-style: dashed;
+}
+
 .chart-panel canvas {
   display: block;
   width: 100%;
@@ -561,6 +661,16 @@ tbody tr:hover {
   background: var(--ink);
 }
 
+.feed-item.alert .feed-marker {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--ink),
+    var(--ink) 2px,
+    transparent 2px,
+    transparent 5px
+  );
+}
+
 .feed-topline {
   display: flex;
   align-items: center;
@@ -591,6 +701,7 @@ tbody tr:hover {
   }
 
   .inventory-panel,
+  .intelligence-panel,
   .chart-panel,
   .feed-panel {
     grid-column: auto;

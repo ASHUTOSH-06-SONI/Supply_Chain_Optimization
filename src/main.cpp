@@ -1,7 +1,8 @@
 #include <iostream>
-#include <unordered_map>
 
 #include "decision/decision_engine.h"
+#include "intelligence/agent.h"
+#include "intelligence/classifier.h"
 #include "ingestion/event_listener.h"
 #include "prediction/predictor.h"
 #include "processing/processor.h"
@@ -17,11 +18,9 @@ int main() {
     Processor processor(state);
     Predictor predictor;
     EventListener listener;
-
-    const std::unordered_map<std::string, Product> products = {
-        {"milk", {"milk", ProductType::Perishable, 3, 1, 5}},
-        {"rice", {"rice", ProductType::Durable, 365, 3, 12}}
-    };
+    ProductIntelligenceAgent agent;
+    const Location user_location{4.0F, 5.0F};
+    const std::vector<Warehouse> warehouses = simulated_warehouses();
 
     log_info("Inventory Intelligence System v2 started");
 
@@ -37,18 +36,34 @@ int main() {
             continue;
         }
 
-        const auto product = products.at(event.product_id);
+        const ProductMetadata& metadata = agent.get_product_metadata(event.product_id);
+        const ProductProfile profile = classify(metadata);
         const int stock = state.get_stock(event.product_id);
-        const float demand = predictor.estimate_demand(
+        const Prediction prediction = predictor.estimate_demand(
             state.recent_sales(event.product_id),
-            product.lead_time
+            metadata,
+            profile
         );
-        const Decision decision = decide(product, stock, demand);
+        const Decision decision = decide(
+            metadata,
+            profile,
+            stock,
+            prediction.demand,
+            user_location,
+            warehouses
+        );
 
-        std::cout << "  stock=" << stock
-                  << " predicted_demand=" << demand
+        std::cout << "  product_id=" << metadata.product_name
+                  << " stock=" << stock
+                  << " category=" << metadata.category
+                  << " type=" << metadata.type
+                  << " strategy=" << prediction.strategy
+                  << " predicted_demand=" << prediction.demand
                   << " action=" << decision.action
                   << " reorder_qty=" << decision.recommended_quantity
+                  << " warehouse=" << (decision.selected_warehouse_id.empty() ? "none" : decision.selected_warehouse_id)
+                  << " eta_days=" << decision.estimated_delivery_time
+                  << " warehouse_distance=" << decision.warehouse_distance
                   << " reason=\"" << decision.reason << "\""
                   << '\n';
     }

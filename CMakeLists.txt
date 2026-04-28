@@ -9,10 +9,13 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_executable(app
     src/main.cpp
     src/decision/decision_engine.cpp
+    src/intelligence/agent.cpp
+    src/intelligence/classifier.cpp
     src/ingestion/event_listener.cpp
     src/prediction/predictor.cpp
     src/processing/processor.cpp
     src/storage/redis_client.cpp
+    src/supply/warehouse.cpp
 )
 
 target_include_directories(app PRIVATE src)

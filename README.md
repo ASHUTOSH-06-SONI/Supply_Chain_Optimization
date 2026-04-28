@@ -7,9 +7,9 @@ inventory decisions.
 ## Prototype status
 
 This is a working v2 prototype. The backend system loop is implemented as a
-C++ simulation, while the frontend mirrors the same event -> prediction ->
-decision flow in the browser so the experience can be tested before wiring in
-an API.
+C++ simulation, while the frontend mirrors the same product input ->
+intelligence -> reasoning -> prediction -> decision flow in the browser so the
+experience can be tested before wiring in an API.
 
 ## What it does
 
@@ -20,7 +20,7 @@ average, and emits inventory decisions.
 Flow:
 
 ```text
-Event Stream -> Processing -> State -> Prediction -> Decision -> Output
+Product Input -> Intelligence -> Reasoning -> Prediction -> Decision -> Output
 ```
 
 ## Current components
@@ -28,9 +28,11 @@ Event Stream -> Processing -> State -> Prediction -> Decision -> Output
 - Event ingestion: simulated sales and stock update events
 - Processing: validation and state mutation
 - State management: Redis-shaped in-memory client for stock and recent sales
-- Product intelligence: product type, expiry, lead time, safety stock
-- Prediction: moving average demand over recent sales
-- Decision engine: `RESTOCK_FAST`, `RESTOCK`, or `HOLD`
+- Product intelligence: cached metadata inference for known and unknown products
+- Reasoning: converts metadata into decision-friendly product profiles
+- Prediction: adaptive model selection over recent sales
+- Geo-aware supply: simulated warehouses, radius search, and optimal warehouse selection
+- Decision engine: `RESTOCK_FROM_WAREHOUSE`, `OUT_OF_STOCK_ALERT`, or `HOLD`
 - Serving layer: console output plus static dashboard prototype
 
 ## Build and run
@@ -49,8 +51,10 @@ workflow before wiring in an API.
 Features:
 
 - Inject manual `Sale` and `Stock` events.
+- Type unknown products and preview inferred metadata before caching them.
 - Run an automatic event stream.
 - Watch stock, predicted demand, and restock decisions update live.
+- Inspect product metadata, reasoning signals, prediction strategy, and decision rationale.
 - Switch between white and black modes with a smooth icon-based transition.
 - Inspect a demand-window chart and decision feed.
 

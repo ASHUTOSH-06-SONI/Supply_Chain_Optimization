@@ -26,13 +26,9 @@
 
       <section class="control-band" aria-label="Event controls">
         <div class="control-group">
-          <label for="product-select">Product</label>
-          <select id="product-select" data-testid="product-select">
-            <option value="milk">Milk</option>
-            <option value="rice">Rice</option>
-            <option value="bread">Bread</option>
-            <option value="detergent">Detergent</option>
-          </select>
+          <label for="product-input">Product input</label>
+          <input id="product-input" list="product-options" value="milk" data-testid="product-input" autocomplete="off">
+          <datalist id="product-options"></datalist>
         </div>
 
         <div class="segmented" role="group" aria-label="Event type">
@@ -94,10 +90,12 @@
             <table>
               <thead>
                 <tr>
-                  <th>Product</th>
-                  <th>Type</th>
+              <th>Product</th>
+                  <th>Metadata</th>
                   <th>Stock</th>
                   <th>Demand</th>
+                  <th>Profile</th>
+                  <th>Supply</th>
                   <th>Decision</th>
                   <th>Qty</th>
                 </tr>
@@ -105,6 +103,17 @@
               <tbody id="inventory-body"></tbody>
             </table>
           </div>
+        </div>
+
+        <div class="panel intelligence-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Intelligence</p>
+              <h2>Product understanding</h2>
+            </div>
+            <span id="cache-status">Cached</span>
+          </div>
+          <div id="metadata-card" class="metadata-card"></div>
         </div>
 
         <div class="panel chart-panel">

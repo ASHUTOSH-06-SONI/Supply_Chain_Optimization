@@ -8,6 +8,8 @@ std::vector<Event> EventListener::simulated_events() const {
         Event::sale("rice", 8, "2026-04-28T09:06:00+05:30"),
         Event::sale("milk", 18, "2026-04-28T09:07:00+05:30"),
         Event::sale("rice", 10, "2026-04-28T09:08:00+05:30"),
-        Event::sale("milk", 7, "2026-04-28T09:09:00+05:30")
+        Event::sale("milk", 7, "2026-04-28T09:09:00+05:30"),
+        Event::stock_update("laptop", 18, "2026-04-28T09:10:00+05:30"),
+        Event::sale("laptop", 5, "2026-04-28T09:11:00+05:30")
     };
 }
