@@ -32,6 +32,8 @@ Product Input -> Intelligence -> Reasoning -> Prediction -> Decision -> Output
 - Reasoning: converts metadata into decision-friendly product profiles
 - Prediction: adaptive model selection over recent sales
 - Geo-aware supply: simulated warehouses, radius search, and optimal warehouse selection
+- Probabilistic demand model: per-product mean/std dev updated from sales events
+- Monte Carlo simulation: stockout probability and expected cost estimation
 - Decision engine: `RESTOCK_FROM_WAREHOUSE`, `OUT_OF_STOCK_ALERT`, or `HOLD`
 - Serving layer: console output plus static dashboard prototype
 
@@ -76,5 +78,5 @@ preview.
 - Replace the in-memory `RedisClient` internals with a real Redis driver.
 - Add an API layer with Crow for event submission and decision retrieval.
 - Connect the dashboard to the C++ API and websocket output.
-- Swap the predictor for a stronger time-series model when the system loop is
-  validated.
+- Tune Monte Carlo cost weights per product category and region.
+- Swap the predictor for a stronger time-series model when the system loop is validated.

@@ -13,6 +13,24 @@ std::string event_type_name(EventType type) {
     return type == EventType::Sale ? "SALE" : "STOCK_UPDATE";
 }
 
+void run_monte_carlo_demo() {
+    const DemandModel volatile_model{20.0, 14.0};
+    const int stock = 22;
+    const Decision monte_carlo = decide(stock, volatile_model);
+    const std::string naive = stock >= static_cast<int>(volatile_model.mean) ? "HOLD" : "RESTOCK";
+
+    std::cout << "\n[demo] high variance demand scenario\n"
+              << "  stock=" << stock
+              << " mean=" << volatile_model.mean
+              << " std_dev=" << volatile_model.std_dev
+              << " naive_decision=" << naive
+              << " monte_carlo_decision=" << monte_carlo.action
+              << " stockout_probability=" << monte_carlo.stockout_probability
+              << " hold_cost=" << monte_carlo.expected_cost_hold
+              << " restock_cost=" << monte_carlo.expected_cost_restock
+              << '\n';
+}
+
 int main() {
     RedisClient state;
     Processor processor(state);
@@ -39,6 +57,7 @@ int main() {
         const ProductMetadata& metadata = agent.get_product_metadata(event.product_id);
         const ProductProfile profile = classify(metadata);
         const int stock = state.get_stock(event.product_id);
+        const DemandModel demand_model = state.get_demand_model(event.product_id);
         const Prediction prediction = predictor.estimate_demand(
             state.recent_sales(event.product_id),
             metadata,
@@ -48,7 +67,7 @@ int main() {
             metadata,
             profile,
             stock,
-            prediction.demand,
+            demand_model,
             user_location,
             warehouses
         );
@@ -58,7 +77,11 @@ int main() {
                   << " category=" << metadata.category
                   << " type=" << metadata.type
                   << " strategy=" << prediction.strategy
-                  << " predicted_demand=" << prediction.demand
+                  << " predicted_mean=" << decision.demand_mean
+                  << " predicted_std_dev=" << decision.demand_std_dev
+                  << " stockout_probability=" << decision.stockout_probability
+                  << " hold_cost=" << decision.expected_cost_hold
+                  << " restock_cost=" << decision.expected_cost_restock
                   << " action=" << decision.action
                   << " reorder_qty=" << decision.recommended_quantity
                   << " warehouse=" << (decision.selected_warehouse_id.empty() ? "none" : decision.selected_warehouse_id)
@@ -67,6 +90,8 @@ int main() {
                   << " reason=\"" << decision.reason << "\""
                   << '\n';
     }
+
+    run_monte_carlo_demo();
 
     return 0;
 }

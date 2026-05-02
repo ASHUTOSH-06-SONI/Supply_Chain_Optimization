@@ -12,6 +12,7 @@ add_executable(app
     src/intelligence/agent.cpp
     src/intelligence/classifier.cpp
     src/ingestion/event_listener.cpp
+    src/prediction/monte_carlo.cpp
     src/prediction/predictor.cpp
     src/processing/processor.cpp
     src/storage/redis_client.cpp

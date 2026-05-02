@@ -17,6 +17,7 @@ bool Processor::process(const Event& event) {
     const int current_stock = state_.get_stock(event.product_id);
     state_.set_stock(event.product_id, std::max(0, current_stock - event.quantity));
     state_.record_sale(event.product_id, event.quantity);
+    state_.update_demand_model(event.product_id, event.quantity);
     return true;
 }
 
